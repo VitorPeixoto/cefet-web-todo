@@ -7,6 +7,7 @@ const tarefas = [
 const taskListElement = document.querySelector('ul#lista-tarefas');
 const taskNameElement = document.querySelector('input#nova-tarefa-nome');
 const taskCategoryElement = document.querySelector('select#nova-tarefa-categoria');
+const taskFilterElement = document.querySelector('select#filtro-de-categoria');
 
 const insereTarefaNaPagina = (tarefa) => {
     const taskElement = document.createElement('li');
@@ -33,4 +34,14 @@ const criaNovaTarefa = () => {
 
     taskNameElement.value = '';
     taskNameElement.focus();
+}
+
+const filtrar = () => {
+    const filterValue = taskFilterElement.value;
+    taskListElement.childNodes.forEach( (child) => {
+        if(!filterValue || child.classList.contains(`categoria-${filterValue}`))
+            child.classList.remove('retido-no-filtro');
+        else
+            child.classList.add('retido-no-filtro');
+    })
 }
