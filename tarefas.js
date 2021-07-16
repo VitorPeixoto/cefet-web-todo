@@ -28,7 +28,10 @@ taskListElement.innerHTML = '';
 tarefas.forEach( insereTarefaNaPagina );
 
 const criaNovaTarefa = () => {
-    const novaTarefa = { nome: taskNameElement.value, categoria: taskCategoryElement.value, realizada: false };
+    const value = taskNameElement.value;
+    if(!value) return;
+
+    const novaTarefa = { nome: value, categoria: taskCategoryElement.value, realizada: false };
     tarefas.push(novaTarefa);
     insereTarefaNaPagina(novaTarefa);
 
@@ -44,4 +47,8 @@ const filtrar = () => {
         else
             child.classList.add('retido-no-filtro');
     })
+}
+
+const keyPress = (event) => {
+    if(event.key === 'Enter') criaNovaTarefa();
 }
