@@ -14,6 +14,12 @@ const insereTarefaNaPagina = (tarefa) => {
     
     taskElement.classList.add('item-tarefa');
     taskElement.classList.add(`categoria-${tarefa.categoria}`);
+
+    taskElement.addEventListener('click', () => {
+        taskElement.classList.toggle('marcado');
+        tarefa.realizada = !tarefa.realizada;
+    })
+
     if(tarefa.realizada)
         taskElement.classList.add('marcado');    
     
@@ -51,4 +57,14 @@ const filtrar = () => {
 
 const keyPress = (event) => {
     if(event.key === 'Enter') criaNovaTarefa();
+}
+
+const clickTarefa = (tarefa) => {
+    const filterValue = taskFilterElement.value;
+    taskListElement.childNodes.forEach( (child) => {
+        if(!filterValue || child.classList.contains(`categoria-${filterValue}`))
+            child.classList.remove('retido-no-filtro');
+        else
+            child.classList.add('retido-no-filtro');
+    })
 }
